@@ -143,6 +143,22 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
             val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             return Pair(sdf.format(start), sdf.format(end))
         }
+        fun getMonthRangeFromPicker(year: Int, month: Int): Pair<String, String> {
+
+            val cal = java.util.Calendar.getInstance()
+
+            // ngày đầu tháng
+            cal.set(year, month, 1)
+            val start = cal.time
+
+            // ngày cuối tháng
+            cal.set(year, month, cal.getActualMaximum(java.util.Calendar.DAY_OF_MONTH))
+            val end = cal.time
+
+            val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+
+            return Pair(sdf.format(start), sdf.format(end))
+        }
         fun getWeekRange(): Pair<String, String> {
             val cal = java.util.Calendar.getInstance()
             cal.set(java.util.Calendar.DAY_OF_WEEK, java.util.Calendar.MONDAY)
@@ -178,8 +194,26 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
         }
 
         btnMonth.setOnClickListener {
-            val (s, e) = getMonthRange()
-            loadByRange(s, e)
+//            resetFilterUI()
+
+            btnMonth.setTextColor(Color.WHITE)
+
+            val cal = java.util.Calendar.getInstance()
+
+            val dialog = android.app.DatePickerDialog(
+                requireContext(),
+                { _, year, month, _ ->
+
+                    val (start, end) = getMonthRangeFromPicker(year, month)
+                    loadByRange(start, end)
+
+                },
+                cal.get(java.util.Calendar.YEAR),
+                cal.get(java.util.Calendar.MONTH),
+                cal.get(java.util.Calendar.DAY_OF_MONTH)
+            )
+
+            dialog.show()
         }
 //        dao.getAllTransactionFull().observe(viewLifecycleOwner) {
 //            adapter.updateData(it)
