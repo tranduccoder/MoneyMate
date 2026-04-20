@@ -185,8 +185,31 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
         val btnMonth = view.findViewById<TextView>(R.id.btnMonth)
 
         btnDay.setOnClickListener {
-            val (s, e) = getToday()
-            loadByRange(s, e)
+
+            btnDay.setTextColor(Color.WHITE)
+
+            val cal = java.util.Calendar.getInstance()
+
+            val dialog = android.app.DatePickerDialog(
+                requireContext(),
+                { _, year, month, day ->
+
+                    val date = String.format(
+                        "%04d-%02d-%02d",
+                        year, month + 1,
+                        day
+                    )
+
+                    //  lọc đúng ngày đã chọn
+                    loadByRange(date, date)
+
+                },
+                cal.get(java.util.Calendar.YEAR),
+                cal.get(java.util.Calendar.MONTH),
+                cal.get(java.util.Calendar.DAY_OF_MONTH)
+            )
+
+            dialog.show()
         }
         btnWeek.setOnClickListener {
             val (s, e) = getWeekRange()
