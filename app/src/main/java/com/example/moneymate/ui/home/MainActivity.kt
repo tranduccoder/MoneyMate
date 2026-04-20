@@ -34,7 +34,7 @@ class MainActivity : AppCompatActivity() {
             }
             true
         }
-        createNotificationChannel() // 🔥 THÊM DÒNG NÀY
+        createNotificationChannel()
         requestNotificationPermission()
 
 

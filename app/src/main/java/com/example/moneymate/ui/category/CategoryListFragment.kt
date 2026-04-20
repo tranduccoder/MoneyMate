@@ -37,12 +37,12 @@ class CategoryListFragment : Fragment(R.layout.fragment_category_list) {
         recyclerView.layoutManager = LinearLayoutManager(requireContext())
         recyclerView.adapter = adapter
 
-        // 🔥 LẤY DATA THẬT
+        //  LẤY DATA THẬT
         viewModel.categories.observe(viewLifecycleOwner) {
             adapter.updateData(it)
         }
 
-        // 👉 mở màn thêm
+        //  mở màn thêm
         btnAdd.setOnClickListener {
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragmentContainer, CategoryFragment())

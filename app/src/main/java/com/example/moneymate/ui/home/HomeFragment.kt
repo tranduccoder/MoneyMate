@@ -83,7 +83,7 @@ class HomeFragment : Fragment(R.layout.fragment_home) {
                 pieChart.invalidate()
             }
         }
-        // 👉 LOAD CHI TIÊU MẶC ĐỊNH
+        //  LOAD CHI TIÊU MẶC ĐỊNH
         loadChart("expense")
 
 

@@ -46,12 +46,12 @@ class CategoryAdapter(
         }
         holder.imgIcon.setImageResource(item.icon)
 
-        // ✅ DELETE
+        //  DELETE
         holder.btnDelete.setOnClickListener {
             onDelete(item)
         }
 
-        // ✅ EDIT
+        //  DELETE
         holder.btnDelete.setOnClickListener {
             onDelete(item)
         }
@@ -71,7 +71,7 @@ class CategoryAdapter(
                 .setNegativeButton("Hủy", null)
                 .show()
         }
-        // ✅ EDIT
+        //  EDIT
         holder.btnUpdate.setOnClickListener {
             val bundle= Bundle().apply {
                 putInt("id",item.id)

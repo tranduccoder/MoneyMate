@@ -55,7 +55,7 @@ class TransactionFragment : Fragment(R.layout.fragment_transaction) {
         // Nhận DATA EDIT
         val id = arguments?.getInt("id", -1) ?: -1
         if (id != -1) {
-            // 👉 SỬA → ẨN chọn loại
+            //  SỬA → ẨN chọn loại
             layoutType.visibility = View.INVISIBLE
             btnExpense.visibility = View.GONE
             btnIncome.visibility = View.GONE
@@ -72,10 +72,10 @@ class TransactionFragment : Fragment(R.layout.fragment_transaction) {
             parentFragmentManager.popBackStack()
         }
         if (id == -1) {
-            // 👉 FORM THÊM
+            //  FORM THÊM
             btnDelete.visibility = View.GONE
         } else {
-            // 👉 FORM SỬA
+            //  FORM SỬA
             btnDelete.visibility = View.VISIBLE
         }
         btnDelete.setOnClickListener {
@@ -136,13 +136,13 @@ class TransactionFragment : Fragment(R.layout.fragment_transaction) {
 
 //                set slected khi edit
                 if (categoryIdArg != -1) {
-                    // 👉 SỬA
+                    //  SỬA
                     val selectedPosition = list.indexOfFirst { it.id == categoryIdArg }
                     if (selectedPosition != -1) {
                         spCategory.setSelection(selectedPosition)
                     }
                 } else {
-                    // 👉 THÊM → chọn mặc định item đầu
+                    //  THÊM → chọn mặc định item đầu
                     if (list.isNotEmpty()) {
                         spCategory.setSelection(0)
                     }
@@ -155,9 +155,9 @@ class TransactionFragment : Fragment(R.layout.fragment_transaction) {
         val factory = TransactionViewModelFactory(repo)
         viewModel = ViewModelProvider(this, factory)[TransactionViewModel::class.java]
 
-        // ======================
-        // 📅 HIỂN THỊ NGÀY HIỆN TẠI (FORMAT VN)
-        // ======================
+
+        //  HIỂN THỊ NGÀY HIỆN TẠI
+
         val dateFormat = SimpleDateFormat("dd/MM/yyyy", Locale("vi", "VN"))
 
         if(id == -1){
@@ -166,9 +166,9 @@ class TransactionFragment : Fragment(R.layout.fragment_transaction) {
             tvDate.text = dateFormat.format(today)
         }
 
-        // ======================
-        // 📅 CHỌN NGÀY
-        // ======================
+
+        // CHỌN NGÀY
+
         tvDate.setOnClickListener {
             val calendar = Calendar.getInstance()
 
@@ -191,9 +191,9 @@ class TransactionFragment : Fragment(R.layout.fragment_transaction) {
             datePicker.show()
         }
 
-        // ======================
-        // 💰 FORMAT TIỀN
-        // ======================
+
+        //  FORMAT TIỀN
+
         etAmount.addTextChangedListener(object : TextWatcher {
 
             private var current = ""
@@ -230,10 +230,8 @@ class TransactionFragment : Fragment(R.layout.fragment_transaction) {
             }
         })
 
+        //  CHỌN LOẠI
 
-        // ======================
-        // 🔘 CHỌN LOẠI
-        // ======================
         btnExpense.setOnClickListener {
             selectedType = "expense"
             btnExpense.setBackgroundResource(R.drawable.bg_btn_selected)
@@ -265,9 +263,9 @@ class TransactionFragment : Fragment(R.layout.fragment_transaction) {
         }
         Log.d("DEBUG_EDIT", "ID = $id")
 
-        // ======================
-        // 👉 FILL DATA EDIT
-        // ======================
+
+        //  FILL DATA EDIT
+
         if (id != -1) {
 
             etNote.setText(noteArg ?: "")
@@ -298,9 +296,9 @@ class TransactionFragment : Fragment(R.layout.fragment_transaction) {
             }
         }
 
-        // ======================
-        // 💾 LƯU
-        // ======================
+
+        // LƯU
+
         btnSave.setOnClickListener {
 
             val amountText = etAmount.text.toString()

@@ -40,7 +40,7 @@ class TransactionAdapter(
             .getInstance(Locale("vi", "VN"))
             .format(item.amount.toLong())
 
-        // 👉 tên danh mục thay vì note
+        //  tên danh mục thay vì note
         holder.tvNote.text = item.categoryName
 
         val sdf = SimpleDateFormat("dd/MM/yyyy", Locale("vi", "VN"))
@@ -51,10 +51,10 @@ class TransactionAdapter(
 
         try {
             val date = if (dateText.all { it.isDigit() }) {
-                // 👉 dữ liệu cũ (millis)
+                //  dữ liệu cũ (millis)
                 Date(dateText.toLong())
             } else {
-                // 👉 dữ liệu mới (yyyy-MM-dd)
+                //  dữ liệu mới (yyyy-MM-dd)
                 inputFormat.parse(dateText)
             }
 
@@ -63,14 +63,14 @@ class TransactionAdapter(
             holder.tvDate.text = ""
         }
 
-        // 👉 icon từ category
+        // icon từ category
         holder.imgIcon.setImageResource(item.categoryIcon)
         holder.itemView.setOnClickListener {
             onClick(item)
         }
 
 
-        // 👉 tiền
+        //  tiền
         if (item.type == "expense") {
             holder.tvAmount.text = "- $formatted ₫"
             holder.tvAmount.setTextColor(0xFFE74C3C.toInt())

@@ -35,7 +35,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
         )
 
 
-        // 👉 ánh xạ đúng id XML
+        //  ánh xạ đúng id XML
         val tvTitle = view.findViewById<TextView>(R.id.tv_title)
         val etName = view.findViewById<EditText>(R.id.etName)
         val btnExpense = view.findViewById<Button>(R.id.btnExpense)
@@ -43,7 +43,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
         val btnSave = view.findViewById<Button>(R.id.btnSave)
         val gridIcon = view.findViewById<GridLayout>(R.id.gridIcon)
 
-        // 👉 init DB
+        //  init DB
         val dao = AppDatabase.getInstance(requireContext()).CategoryDao()
         val repo = CategoryRepository(dao)
         val factory = CategoryViewModelFactory(repo)
@@ -61,7 +61,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
 
         viewModel = ViewModelProvider(this, factory)[CategoryViewModel::class.java]
 
-        // 👉 chọn loại
+        //  chọn loại
         btnExpense.setOnClickListener {
             selectedType = "expense"
             btnExpense.setBackgroundResource(R.drawable.bg_btn_selected)
@@ -74,7 +74,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
             btnExpense.setBackgroundResource(android.R.color.transparent)
         }
 
-        // 👉 chọn icon
+        //  chọn icon
         for (i in 0 until gridIcon.childCount) {
             val icon = gridIcon.getChildAt(i) as ImageView
 
@@ -93,7 +93,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
             }
         }
 
-        // 🔥 FILL DATA KHI EDIT
+        //  FILL DATA KHI EDIT
         if (categoryId != -1) {
             etName.setText(nameArg)
 
@@ -113,7 +113,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
         }
 
 
-        // 👉 lưu
+        //  lưu
         btnSave.setOnClickListener {
             val name = etName.text.toString()
 
@@ -123,7 +123,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
             }
 
             val category = CategoryEntity(
-                // 🔥 FIX: id cho update
+
                 id = if (categoryId == -1) 0 else categoryId,
                 user_id = 1,
                 name = name,
@@ -131,7 +131,7 @@ class CategoryFragment : Fragment(R.layout.fragment_category) {
                 icon = selectedIcon
             )
 
-            // 🔥 PHÂN BIỆT ADD vs UPDATE
+            //  PHÂN BIỆT ADD vs UPDATE
             if (categoryId == -1) {
                 viewModel.insert(category)
             } else {

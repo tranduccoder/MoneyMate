@@ -35,7 +35,8 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
 
         val tvIncome=view.findViewById<TextView>(R.id.tvIncome)
         val tvExpense=view.findViewById<TextView>(R.id.tvExpense)
-        // 🔥 BIẾN NÀY GIỮ LIVEDATA HIỆN TẠI (để không bị chồng observe)
+
+        //  BIẾN NÀY GIỮ LIVEDATA HIỆN TẠI (để không bị chồng observe)
         var currentLiveData: LiveData<List<TransactionFull>>? = null
 
         fun formatMoney(amount: Double): String {
@@ -43,63 +44,6 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
             return formatter.format(amount) + " đ"
         }
 
-//        fun loadChart(type: String) {
-//            dao.getAllTransactionFull().observe(viewLifecycleOwner) { list ->
-//
-//                val income = list
-//                    .filter { it.type == "income" }
-//                    .sumOf { it.amount }
-//
-//                val expense = list
-//                    .filter { it.type == "expense" }
-//                    .sumOf { it.amount }
-//
-//                val entries = ArrayList<PieEntry>()
-//
-//                if (income > 0) {
-//                    entries.add(PieEntry(income.toFloat(), "Thu nhập"))
-//                }
-//
-//                if (expense > 0) {
-//                    entries.add(PieEntry(expense.toFloat(), "Chi tiêu"))
-//                }
-//
-//                val dataSet = PieDataSet(entries, "Tổng quan tài chính")
-//
-//                dataSet.setColors(
-//                    Color.parseColor("#4CAF50"), // xanh thu nhập
-//                    Color.parseColor("#F44336")  // đỏ chi tiêu
-//                )
-//
-//                val data = PieData(dataSet)
-//                data.setValueTextSize(14f)
-//
-//                pieChart.data = data
-//                pieChart.description.isEnabled = false
-//                pieChart.centerText = "Tổng thu/chi"
-//                pieChart.setEntryLabelColor(Color.BLACK)
-//                pieChart.animateY(800)
-//
-//                pieChart.invalidate()
-//            }
-//        }
-        // 👉 LOAD CHI TIÊU MẶC ĐỊNH
-//        loadChart("expense")
-//        loadChart("income")
-
-//        dao.getAllTransactionFull().observe(viewLifecycleOwner) { list ->
-//
-//            val income = list
-//                .filter { it.type == "income" }
-//                .sumOf { it.amount }
-//
-//            val expense = list
-//                .filter { it.type == "expense" }
-//                .sumOf { it.amount }
-//
-//            tvIncome.text = "+${formatMoney(income)}"
-//            tvExpense.text = "-${formatMoney(expense)}"
-//        }
 
 
 
@@ -134,7 +78,7 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
             tvIncome.text = "+${formatMoney(income)}"
             tvExpense.text = "-${formatMoney(expense)}"
 
-            // 👉 PIE CHART
+            //  PIE CHART
             val entries = ArrayList<PieEntry>()
 
             if (income > 0) entries.add(PieEntry(income.toFloat(), "Thu nhập"))
@@ -148,7 +92,7 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
             pieChart.centerText = "Tổng thu/chi"
             pieChart.invalidate()
 
-            // 👉 LIST
+            //  LIST
             adapter.updateData(list)
         }
 
@@ -162,16 +106,16 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
                 .addToBackStack(null)
                 .commit()
         }
-        // =========================
-        // 🔥 THÊM FILTER NGÀY / TUẦN / THÁNG
-        // =========================
+
+        //  THÊM FILTER NGÀY / TUẦN / THÁNG
+
 
         fun loadByRange(start: String, end: String) {
 
-            // 🔥 XÓA OBSERVER CŨ (QUAN TRỌNG)
+            //  XÓA OBSERVER CŨ (QUAN TRỌNG)
             currentLiveData?.removeObservers(viewLifecycleOwner)
 
-            // 🔥 LẤY DATA THEO DATE
+            //  LẤY DATA THEO DATE
             currentLiveData = dao.getTransactionByDateRange(start, end)
 
             currentLiveData?.observe(viewLifecycleOwner) { list ->
@@ -179,7 +123,7 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
             }
         }
 
-        // 🔥 HÀM DATE
+        //  HÀM DATE
         fun getToday(): Pair<String, String> {
             val sdf = java.text.SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
             val today = sdf.format(java.util.Date())
@@ -211,15 +155,15 @@ class StatsFragment : Fragment(R.layout.fragment_stats) {
             return Pair(sdf.format(start), sdf.format(end))
         }
 
-        // =========================
-        // 🔥 LOAD MẶC ĐỊNH (THÁNG)
-        // =========================
+
+        //  LOAD MẶC ĐỊNH (THÁNG)
+
         val (start, end) = getMonthRange()
         loadByRange(start, end)
 
-        // =========================
-        // 🔥 BUTTON FILTER (PHẢI CÓ TRONG XML)
-        // =========================
+
+        // BUTTON FILTER (PHẢI CÓ TRONG XML)
+
         val btnDay = view.findViewById<TextView>(R.id.btnDay)
         val btnWeek = view.findViewById<TextView>(R.id.btnWeek)
         val btnMonth = view.findViewById<TextView>(R.id.btnMonth)
