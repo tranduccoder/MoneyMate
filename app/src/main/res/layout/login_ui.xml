@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.om/apk/res-auto"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/login_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.auth.LoginActivity"
-    android:background="#CC7272"
+    android:background="@drawable/bg_wallpaper"
     >
 
     <LinearLayout
@@ -18,11 +18,11 @@
         android:padding="24dp"
         >
 
-        <TextView
+         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="MoneyMate"
-            android:textColor="#FFFFFF"
+            android:textColor="#4B5968"
             android:textSize="28sp"
             android:textStyle="bold"
             android:layout_gravity="center_horizontal"
@@ -49,17 +49,25 @@
             android:textColor="#000000"
             android:textColorHint="#94A3B8" />
 
-        <EditText
-            android:id="@+id/edt_PasswordLogin"
+        <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="20dp"
-            android:background="@drawable/bogoc"
-            android:hint="Mật khẩu"
-            android:inputType="textPassword"
-            android:padding="14dp"
-            android:textColor="#000000"
-            android:textColorHint="#94A3B8" />
+            app:boxBackgroundMode="none"
+            app:endIconMode="password_toggle"
+            app:hintEnabled="false"
+            android:background="@drawable/bogoc">
+
+            <com.google.android.material.textfield.TextInputEditText
+                android:id="@+id/edt_PasswordLogin"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="Mật khẩu"
+                android:inputType="textPassword"
+                android:padding="16dp"
+                android:textColor="#000000"
+                android:textColorHint="#94A3B8" />
+        </com.google.android.material.textfield.TextInputLayout>
 
         <Button
             android:id="@+id/btn_Login"

@@ -13,7 +13,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.moneymate.R
 import com.example.moneymate.ui.home.MainActivity
-import com.example.moneymate.viewmodel.UserViewModel
+import com.example.moneymate.ui.auth.UserViewModel
 
 class LoginActivity : AppCompatActivity() {
     lateinit var txt_reg: TextView
@@ -41,14 +41,25 @@ class LoginActivity : AppCompatActivity() {
         btn_login.setOnClickListener {
             val email = edt_email.text.toString()
             val password = edt_password.text.toString()
+            if(email.isEmpty()){
+                edt_email.error="Vui lòng nhập email"
+                edt_email.requestFocus()
+                return@setOnClickListener
+            }
+
+            if(password.isEmpty()){
+                edt_password.error="Vui lòng nhập mật khẩu"
+                edt_password.requestFocus()
+                return@setOnClickListener
+            }
             viewModel.login(email, password) { user ->
                 if (user != null) {
-                    saveLogin(user.id)
+//                    saveLogin(user.id)
                     val intent = Intent(this, MainActivity::class.java)
                     startActivity(intent)
                     finish()
                 }else{
-                    Toast.makeText(this, "Đăng nhập thất bại! ", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, "Email hoặc mật khẩu không đúng! ", Toast.LENGTH_SHORT).show()
                 }
             }
         }

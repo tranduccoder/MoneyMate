@@ -1,24 +1,25 @@
 <ScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
-    android:background="#F8F9FA"
+    android:background="@drawable/bg_home"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <LinearLayout
-        android:padding="16dp"
+        android:padding="12dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="56dp">
         <!-- 🔥 HEADER -->
         <RelativeLayout
+            android:padding="12dp"
             android:layout_width="match_parent"
-            android:layout_height="50dp">
+            android:layout_height="56dp">
 
             <TextView
-                android:text="Thống kê"
+                android:text="Thống Kê"
                 android:textSize="18sp"
                 android:textStyle="bold"
-                android:layout_centerVertical="true"
+                android:layout_centerInParent="true"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"/>
 
@@ -27,9 +28,48 @@
                 android:src="@android:drawable/ic_input_add"
                 android:layout_alignParentEnd="true"
                 android:layout_centerVertical="true"
-                android:layout_width="28dp"
-                android:layout_height="28dp"/>
-        </RelativeLayout>
+                android:layout_width="30dp"
+                android:layout_height="30dp"/>
+        </RelativeLayout><!-- 🔥 FILTER NGÀY / TUẦN / THÁNG -->
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <TextView
+                android:id="@+id/btnDay"
+                android:text="Ngày"
+                android:textColor="#333"
+                android:padding="8dp"
+
+                android:layout_margin="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/btnWeek"
+                android:text="Tuần"
+                android:textColor="#333"
+                android:padding="8dp"
+
+                android:layout_margin="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+            <TextView
+                android:id="@+id/btnMonth"
+                android:text="Tháng"
+                android:textColor="#fff"
+                android:padding="8dp"
+
+                android:layout_margin="4dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"/>
+
+        </LinearLayout>
+
 
         <!-- BIỂU ĐỒ -->
         <com.github.mikephil.charting.charts.PieChart

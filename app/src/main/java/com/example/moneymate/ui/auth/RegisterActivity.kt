@@ -11,7 +11,7 @@ import androidx.core.view.WindowInsetsCompat
 import androidx.lifecycle.ViewModelProvider
 import com.example.moneymate.R
 import com.example.moneymate.data.local.entity.User
-import com.example.moneymate.viewmodel.UserViewModel
+import com.example.moneymate.ui.auth.UserViewModel
 
 class RegisterActivity : AppCompatActivity() {
     lateinit var edt_email: EditText
